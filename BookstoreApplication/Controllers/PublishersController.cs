@@ -10,73 +10,51 @@ namespace BookstoreApplication.Controllers
     [ApiController]
     public class PublishersController : ControllerBase
     {
-        // GET: api/publishers
+        private readonly IPublisherRepository _publisherRepository;
+        public PublishersController(IPublisherRepository publisherRepository)
+        {
+            _publisherRepository = publisherRepository;
+        }
+
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            return Ok(DataStore.Publishers);
+            var publishers = await _publisherRepository.GetAllAsync();
+
+            return Ok(publishers);
         }
 
-        // GET api/publishers/5
         [HttpGet("{id}")]
-        public IActionResult GetOne(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var publisher = DataStore.Publishers.FirstOrDefault(a => a.Id == id);
-            if (publisher == null)
-            {
-                return NotFound();
-            }
+            var publisher = await _publisherRepository.GetByIdAsync(id);
+
             return Ok(publisher);
         }
 
-        // POST api/publishers
         [HttpPost]
-        public IActionResult Post(Publisher publisher)
+        public async Task<IActionResult> Post(Publisher publisher)
         {
-            publisher.Id = DataStore.GetNewPublisherId();
-            DataStore.Publishers.Add(publisher);
+            await _publisherRepository.AddAsync(publisher);
+
             return Ok(publisher);
         }
 
-        // PUT api/publishers/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, Publisher publisher)
+        public async Task<IActionResult> Put(int id, Publisher publisher)
         {
-            if (id != publisher.Id)
-            {
-                return BadRequest();
-            }
+            _publisherRepository.Update(publisher);
+            _publisherRepository.SaveChangesAsync();
 
-            var existingPublisher = DataStore.Publishers.FirstOrDefault(a => a.Id == id);
-            if (existingPublisher == null)
-            {
-                return NotFound();
-            }
-
-            int index = DataStore.Publishers.IndexOf(existingPublisher);
-            if (index == -1)
-            {
-                return NotFound();
-
-            }
-
-            DataStore.Publishers[index] = publisher;
-            return Ok(publisher);
+            return NoContent();
         }
 
-        // DELETE api/publishers/5
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var publisher = DataStore.Publishers.FirstOrDefault(a => a.Id == id);
-            if (publisher == null)
-            {
-                return NotFound();
-            }
-            DataStore.Publishers.Remove(publisher);
-
-            // kaskadno brisanje svih knjiga obrisanog izdavača
-            DataStore.Books.RemoveAll(b => b.PublisherId == id);
+            var publisher = await _publisherRepository.GetByIdAsync(id);
+            _publisherRepository.Delete(publisher);
+            await _publisherRepository.SaveChangesAsync();
 
             return NoContent();
         }
