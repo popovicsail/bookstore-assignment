@@ -1,5 +1,4 @@
-﻿using BookstoreApplication.Data;
-using BookstoreApplication.Models;
+﻿using BookstoreApplication.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;

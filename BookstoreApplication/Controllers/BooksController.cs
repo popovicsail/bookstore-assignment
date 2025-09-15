@@ -1,13 +1,11 @@
-﻿using BookstoreApplication.Data;
+﻿using BookstoreApplication.Dtos;
 using BookstoreApplication.Models;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace BookstoreApplication.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]  
     public class BooksController : ControllerBase
     {
         private readonly IBookRepository _bookRepository;
@@ -17,19 +15,46 @@ namespace BookstoreApplication.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<ActionResult<IEnumerable<BookDetailDto>>> GetAllBooks()
         {
-            var books = await _bookRepository.GetAllAsync();
+            var booksFromDb = await _bookRepository.GetAllAsync();
 
-            return Ok(books);
+            var booksDto = booksFromDb.Select(book => new BookDetailDto
+            {
+                Id = book.Id,
+                Title = book.Title,
+                PageCount = book.PageCount,
+                ISBN = book.ISBN,
+                PublishedDate = book.PublishedDate.ToString("yyyy-MM-dd"),
+                Author = new AuthorDto { Id = book.Author.Id, FullName = book.Author.FullName },
+                Publisher = new PublisherDto { Id = book.Publisher.Id, Name = book.Publisher.Name }
+            });
+
+            return Ok(booksDto);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<ActionResult<BookDetailDto>> GetBookById(int id)
         {
-            var book = await _bookRepository.GetByIdAsync(id);
+            var bookFromDb = await _bookRepository.GetByIdAsync(id);
 
-            return Ok(book);
+            if (bookFromDb == null)
+            {
+                return NotFound();
+            }
+
+            var bookDto = new BookDetailDto
+            {
+                Id = bookFromDb.Id,
+                Title = bookFromDb.Title,
+                PageCount = bookFromDb.PageCount,
+                ISBN = bookFromDb.ISBN,
+                PublishedDate = bookFromDb.PublishedDate.ToString("yyyy-MM-dd"),
+                Author = new AuthorDto { Id = bookFromDb.Author.Id, FullName = bookFromDb.Author.FullName },
+                Publisher = new PublisherDto { Id = bookFromDb.Publisher.Id, Name = bookFromDb.Publisher.Name }
+            };
+
+            return Ok(bookDto);
         }
 
         [HttpPost]

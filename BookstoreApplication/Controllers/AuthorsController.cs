@@ -1,5 +1,4 @@
-﻿using BookstoreApplication.Data;
-using BookstoreApplication.Models;
+﻿using BookstoreApplication.Models;
 using BookstoreApplication.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

@@ -22,6 +22,9 @@ builder.Services.AddDbContext<BookstoreDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")).UseSnakeCaseNamingConvention());
 
 builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<IPublisherRepository, PublisherRepository>();
+builder.Services.AddScoped<IAwardRepository, AwardRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
