@@ -7,6 +7,7 @@ public static class DataSeeder
 {
     public static void Seed(ModelBuilder modelBuilder)
     {
+        // --- 5 AUTORA ---
         var authors = new List<Author>
         {
             new Author { Id = 1, FullName = "Ivo Andrić", Biography = "Biografija Ive Andrića...", DateOfBirth = new DateTime(1892, 10, 9, 0, 0, 0, DateTimeKind.Utc) },
@@ -16,6 +17,7 @@ public static class DataSeeder
             new Author { Id = 5, FullName = "Dobrica Ćosić", Biography = "Biografija Dobrice Ćosića...", DateOfBirth = new DateTime(1921, 12, 29, 0, 0, 0, DateTimeKind.Utc) }
         };
 
+        // --- 3 IZDAVAČA ---
         var publishers = new List<Publisher>
         {
             new Publisher { Id = 1, Name = "Laguna", Address = "Resavska 33, Beograd", Website = "www.laguna.rs" },
@@ -23,14 +25,16 @@ public static class DataSeeder
             new Publisher { Id = 3, Name = "BIGZ školstvo", Address = "Bulevar vojvode Mišića 17, Beograd", Website = "www.bigzskolstvo.rs" }
         };
 
+        // --- 4 NAGRADE ---
         var awards = new List<Award>
         {
-            new Award { Id = 1, Name = "NIN-ova nagrada", Description = "Književna nagrada za najbolji roman godine.", DateOfCreation = 1954 },
-            new Award { Id = 2, Name = "Andrićeva nagrada", Description = "Književna nagrada za najbolju pripovetku.", DateOfCreation = 1975 },
-            new Award { Id = 3, Name = "Meša Selimović nagrada", Description = "Književna nagrada za najbolju knjigu godine.", DateOfCreation = 1988 },
-            new Award { Id = 4, Name = "Nobelova nagrada za književnost", Description = "Međunarodna nagrada za književnost.", DateOfCreation = 1901 }
+            new Award { Id = 1, Name = "NIN-ova nagrada", Description = "Književna nagrada za najbolji roman godine.", DateOfCreation = new DateTime(1954, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+            new Award { Id = 2, Name = "Andrićeva nagrada", Description = "Književna nagrada za najbolju pripovetku.", DateOfCreation = new DateTime(1975, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+            new Award { Id = 3, Name = "Meša Selimović nagrada", Description = "Književna nagrada za najbolju knjigu godine.", DateOfCreation = new DateTime(1988, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+            new Award { Id = 4, Name = "Nobelova nagrada za književnost", Description = "Međunarodna nagrada za književnost.", DateOfCreation = new DateTime(1901, 1, 1, 0, 0, 0, DateTimeKind.Utc) }
         };
 
+        // --- 12 KNJIGA ---
         var books = new List<Book>
         {
             new Book { Id = 1, Title = "Na Drini ćuprija", PageCount = 379, PublishedDate = new DateTime(1945, 1, 1, 0, 0, 0, DateTimeKind.Utc), ISBN = "978-86-521-1755-7", AuthorId = 1, PublisherId = 1 },
@@ -47,25 +51,27 @@ public static class DataSeeder
             new Book { Id = 12, Title = "Travnička hronika", PageCount = 496, PublishedDate = new DateTime(1945, 1, 1, 0, 0, 0, DateTimeKind.Utc), ISBN = "978-86-521-1472-3", AuthorId = 1, PublisherId = 1 }
         };
 
+        // --- 15 PODATAKA U TABELI POVEZNICI (AuthorAward) ---
         var authorAwards = new List<AuthorAward>
         {
-            new AuthorAward { Id = -1, AuthorId = 1, AwardId = 4, YearOfWinning = 1961 },
-            new AuthorAward { Id = -2, AuthorId = 1, AwardId = 2, YearOfWinning = 1976 },
-            new AuthorAward { Id = -3, AuthorId = 2, AwardId = 1, YearOfWinning = 1967 },
-            new AuthorAward { Id = -4, AuthorId = 2, AwardId = 3, YearOfWinning = 1988 },
-            new AuthorAward { Id = -5, AuthorId = 3, AwardId = 1, YearOfWinning = 1972 },
-            new AuthorAward { Id = -6, AuthorId = 3, AwardId = 2, YearOfWinning = 1978 },
-            new AuthorAward { Id = -7, AuthorId = 4, AwardId = 3, YearOfWinning = 1990 },
-            new AuthorAward { Id = -8, AuthorId = 5, AwardId = 1, YearOfWinning = 1954 },
-            new AuthorAward { Id = -9, AuthorId = 5, AwardId = 3, YearOfWinning = 1992 },
-            new AuthorAward { Id = -10, AuthorId = 1, AwardId = 1, YearOfWinning = 1955 },
-            new AuthorAward { Id = -11, AuthorId = 2, AwardId = 2, YearOfWinning = 1980 },
-            new AuthorAward { Id = -12, AuthorId = 3, AwardId = 3, YearOfWinning = 1989 },
-            new AuthorAward { Id = -13, AuthorId = 4, AwardId = 1, YearOfWinning = 1930 },
-            new AuthorAward { Id = -14, AuthorId = 4, AwardId = 2, YearOfWinning = 1982 },
-            new AuthorAward { Id = -15, AuthorId = 5, AwardId = 2, YearOfWinning = 1985 }
+            new AuthorAward { Id = -1, AuthorId = 1, AwardId = 4, DateOfWinning = new DateTime(1961, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+            new AuthorAward { Id = -2, AuthorId = 1, AwardId = 2, DateOfWinning = new DateTime(1976, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+            new AuthorAward { Id = -3, AuthorId = 2, AwardId = 1, DateOfWinning = new DateTime(1967, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+            new AuthorAward { Id = -4, AuthorId = 2, AwardId = 3, DateOfWinning = new DateTime(1988, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+            new AuthorAward { Id = -5, AuthorId = 3, AwardId = 1, DateOfWinning = new DateTime(1972, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+            new AuthorAward { Id = -6, AuthorId = 3, AwardId = 2, DateOfWinning = new DateTime(1978, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+            new AuthorAward { Id = -7, AuthorId = 4, AwardId = 3, DateOfWinning = new DateTime(1990, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+            new AuthorAward { Id = -8, AuthorId = 5, AwardId = 1, DateOfWinning = new DateTime(1954, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+            new AuthorAward { Id = -9, AuthorId = 5, AwardId = 3, DateOfWinning = new DateTime(1992, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+            new AuthorAward { Id = -10, AuthorId = 1, AwardId = 1, DateOfWinning = new DateTime(1955, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+            new AuthorAward { Id = -11, AuthorId = 2, AwardId = 2, DateOfWinning = new DateTime(1980, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+            new AuthorAward { Id = -12, AuthorId = 3, AwardId = 3, DateOfWinning = new DateTime(1989, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+            new AuthorAward { Id = -13, AuthorId = 4, AwardId = 1, DateOfWinning = new DateTime(1930, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+            new AuthorAward { Id = -14, AuthorId = 4, AwardId = 2, DateOfWinning = new DateTime(1982, 1, 1, 0, 0, 0, DateTimeKind.Utc) },
+            new AuthorAward { Id = -15, AuthorId = 5, AwardId = 2, DateOfWinning = new DateTime(1985, 1, 1, 0, 0, 0, DateTimeKind.Utc) }
         };
 
+        // Popunjavamo tabele
         modelBuilder.Entity<Author>().HasData(authors);
         modelBuilder.Entity<Publisher>().HasData(publishers);
         modelBuilder.Entity<Award>().HasData(awards);

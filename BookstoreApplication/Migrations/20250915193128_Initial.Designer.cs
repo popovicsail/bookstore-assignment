@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BookstoreApplication.Migrations
 {
     [DbContext(typeof(BookstoreDbContext))]
-    [Migration("20250915164331_v3")]
-    partial class v3
+    [Migration("20250915193128_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -107,9 +107,9 @@ namespace BookstoreApplication.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("award_id");
 
-                    b.Property<int>("YearOfWinning")
-                        .HasColumnType("integer")
-                        .HasColumnName("year_of_winning");
+                    b.Property<DateTime>("DateOfWinning")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("date_of_winning");
 
                     b.HasKey("Id")
                         .HasName("pk_author_award_bridge");
@@ -128,105 +128,105 @@ namespace BookstoreApplication.Migrations
                             Id = -1,
                             AuthorId = 1,
                             AwardId = 4,
-                            YearOfWinning = 1961
+                            DateOfWinning = new DateTime(1961, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             Id = -2,
                             AuthorId = 1,
                             AwardId = 2,
-                            YearOfWinning = 1976
+                            DateOfWinning = new DateTime(1976, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             Id = -3,
                             AuthorId = 2,
                             AwardId = 1,
-                            YearOfWinning = 1967
+                            DateOfWinning = new DateTime(1967, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             Id = -4,
                             AuthorId = 2,
                             AwardId = 3,
-                            YearOfWinning = 1988
+                            DateOfWinning = new DateTime(1988, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             Id = -5,
                             AuthorId = 3,
                             AwardId = 1,
-                            YearOfWinning = 1972
+                            DateOfWinning = new DateTime(1972, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             Id = -6,
                             AuthorId = 3,
                             AwardId = 2,
-                            YearOfWinning = 1978
+                            DateOfWinning = new DateTime(1978, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             Id = -7,
                             AuthorId = 4,
                             AwardId = 3,
-                            YearOfWinning = 1990
+                            DateOfWinning = new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             Id = -8,
                             AuthorId = 5,
                             AwardId = 1,
-                            YearOfWinning = 1954
+                            DateOfWinning = new DateTime(1954, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             Id = -9,
                             AuthorId = 5,
                             AwardId = 3,
-                            YearOfWinning = 1992
+                            DateOfWinning = new DateTime(1992, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             Id = -10,
                             AuthorId = 1,
                             AwardId = 1,
-                            YearOfWinning = 1955
+                            DateOfWinning = new DateTime(1955, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             Id = -11,
                             AuthorId = 2,
                             AwardId = 2,
-                            YearOfWinning = 1980
+                            DateOfWinning = new DateTime(1980, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             Id = -12,
                             AuthorId = 3,
                             AwardId = 3,
-                            YearOfWinning = 1989
+                            DateOfWinning = new DateTime(1989, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             Id = -13,
                             AuthorId = 4,
                             AwardId = 1,
-                            YearOfWinning = 1930
+                            DateOfWinning = new DateTime(1930, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             Id = -14,
                             AuthorId = 4,
                             AwardId = 2,
-                            YearOfWinning = 1982
+                            DateOfWinning = new DateTime(1982, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         },
                         new
                         {
                             Id = -15,
                             AuthorId = 5,
                             AwardId = 2,
-                            YearOfWinning = 1985
+                            DateOfWinning = new DateTime(1985, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
                         });
                 });
 
@@ -239,8 +239,8 @@ namespace BookstoreApplication.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("DateOfCreation")
-                        .HasColumnType("integer")
+                    b.Property<DateTime>("DateOfCreation")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("date_of_creation");
 
                     b.Property<string>("Description")
@@ -262,28 +262,28 @@ namespace BookstoreApplication.Migrations
                         new
                         {
                             Id = 1,
-                            DateOfCreation = 1954,
+                            DateOfCreation = new DateTime(1954, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Description = "Književna nagrada za najbolji roman godine.",
                             Name = "NIN-ova nagrada"
                         },
                         new
                         {
                             Id = 2,
-                            DateOfCreation = 1975,
+                            DateOfCreation = new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Description = "Književna nagrada za najbolju pripovetku.",
                             Name = "Andrićeva nagrada"
                         },
                         new
                         {
                             Id = 3,
-                            DateOfCreation = 1988,
+                            DateOfCreation = new DateTime(1988, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Description = "Književna nagrada za najbolju knjigu godine.",
                             Name = "Meša Selimović nagrada"
                         },
                         new
                         {
                             Id = 4,
-                            DateOfCreation = 1901,
+                            DateOfCreation = new DateTime(1901, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
                             Description = "Međunarodna nagrada za književnost.",
                             Name = "Nobelova nagrada za književnost"
                         });

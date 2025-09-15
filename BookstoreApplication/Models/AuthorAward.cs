@@ -10,6 +10,6 @@
         public int AwardId { get; set; }
         public Award Award { get; set; }
 
-        public int YearOfWinning { get; set; }
+        public DateTime DateOfWinning { get; set; }
     }
 }
