@@ -13,6 +13,8 @@ public class BookstoreDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+
         modelBuilder.Entity<AuthorAward>(entity =>
         {
             entity.ToTable("AuthorAwardBridge");
@@ -37,5 +39,7 @@ public class BookstoreDbContext : DbContext
             .WithMany(Publisher => Publisher.Books)
             .HasForeignKey(Book => Book.PublisherId)
             .OnDelete(DeleteBehavior.Restrict);
+
+        DataSeeder.Seed(modelBuilder);
     }
 }
