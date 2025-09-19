@@ -43,7 +43,6 @@ namespace BookstoreApplication.Controllers
         public async Task<IActionResult> Put(int id, Author author)
         {
             _authorRepository.Update(author);
-            _authorRepository.SaveChangesAsync();
 
             return NoContent();
         }
@@ -53,7 +52,6 @@ namespace BookstoreApplication.Controllers
         {
             var author = await _authorRepository.GetByIdAsync(id);
             _authorRepository.Delete(author);
-            await _authorRepository.SaveChangesAsync();
 
             return NoContent();
         }

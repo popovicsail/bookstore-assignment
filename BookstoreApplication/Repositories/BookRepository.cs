@@ -16,12 +16,18 @@ namespace BookstoreApplication.Repositories
 
         public async Task<IEnumerable<Book>> GetAllAsync()
         {
-            return await _context.Books.Include(b => b.Publisher).Include(b => b.Author).ToListAsync();
+            return await _context.Books
+                .Include(b => b.Publisher)
+                .Include(b => b.Author)
+                .ToListAsync();
         }
 
         public async Task<Book?> GetByIdAsync(int id)
         {
-            return await _context.Books.Include(b => b.Publisher).Include(b => b.Author).FirstOrDefaultAsync(b => b.Id == id);
+            return await _context.Books
+                .Include(b => b.Publisher)
+                .Include(b => b.Author)
+                .FirstOrDefaultAsync(b => b.Id == id);
         }
 
         public async Task AddAsync(Book book)
@@ -29,18 +35,16 @@ namespace BookstoreApplication.Repositories
             await _context.Books.AddAsync(book);
         }
 
-        public void Update(Book book)
+        public async void Update(Book book)
         {
             _context.Books.Update(book);
+            await _context.SaveChangesAsync();
         }
 
-        public void Delete(Book book)
+        public async void Delete(Book book)
         {
             _context.Books.Remove(book);
-        }
-        public async Task<int> SaveChangesAsync()
-        {
-            return await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
     }
 }

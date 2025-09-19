@@ -29,18 +29,16 @@ namespace BookstoreApplication.Repositories
             await _context.Publishers.AddAsync(publisher);
         }
 
-        public void Update(Publisher publisher)
+        public async void Update(Publisher publisher)
         {
             _context.Publishers.Update(publisher);
+            await _context.SaveChangesAsync();
         }
 
-        public void Delete(Publisher publisher)
+        public async void Delete(Publisher publisher)
         {
             _context.Publishers.Remove(publisher);
-        }
-        public async Task<int> SaveChangesAsync()
-        {
-            return await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
     }
 }

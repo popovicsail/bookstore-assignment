@@ -7,5 +7,4 @@ public interface IAuthorRepository
     Task AddAsync(Author author);
     void Update(Author author);
     void Delete(Author author);
-    Task<int> SaveChangesAsync();
 }

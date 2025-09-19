@@ -7,5 +7,4 @@ public interface IAwardRepository
     Task AddAsync(Award award);
     void Update(Award award);
     void Delete(Award award);
-    Task<int> SaveChangesAsync();
 }

@@ -29,18 +29,16 @@ namespace BookstoreApplication.Repositories
             await _context.Awards.AddAsync(award);
         }
 
-        public void Update(Award award)
+        public async void Update(Award award)
         {
             _context.Awards.Update(award);
+            await _context.SaveChangesAsync();
         }
 
-        public void Delete(Award award)
+        public async void Delete(Award award)
         {
             _context.Awards.Remove(award);
-        }
-        public async Task<int> SaveChangesAsync()
-        {
-            return await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
     }
 }

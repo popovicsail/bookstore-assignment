@@ -3,10 +3,11 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 
-public static class DataSeeder
+public class DataSeeder
 {
-    public static void Seed(ModelBuilder modelBuilder)
+    public async Task Seed(ModelBuilder modelBuilder)
     {
+
         // --- 5 AUTORA ---
         var authors = new List<Author>
         {

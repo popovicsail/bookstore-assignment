@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 public class BookstoreDbContext : DbContext
 {
     public BookstoreDbContext(DbContextOptions<BookstoreDbContext> options) : base(options) { }
+    public DataSeeder dataSeeder { get; set; }
 
     public DbSet<Author> Authors { get; set; }
     public DbSet<Book> Books { get; set; }
@@ -42,6 +43,6 @@ public class BookstoreDbContext : DbContext
             .HasForeignKey(Book => Book.PublisherId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        DataSeeder.Seed(modelBuilder);
+        dataSeeder.Seed(modelBuilder);
     }
 }

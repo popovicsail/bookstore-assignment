@@ -7,5 +7,4 @@ public interface IPublisherRepository
     Task AddAsync(Publisher publisher);
     void Update(Publisher publisher);
     void Delete(Publisher publisher);
-    Task<int> SaveChangesAsync();
 }
